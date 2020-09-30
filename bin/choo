@@ -7,6 +7,8 @@ require 'colorize'
 
 def aggregate_database_schema_configuration
 <<-EOF
+
+
 # This should not be configuration, therefore it explicitly is until the 
 # framework allows the user to manage their databases using migrations
 
@@ -17,6 +19,31 @@ AggregateRecord::Schema.define do
 end
 EOF
 end
+
+def gemfile
+<<-EOF
+
+source 'https://rubygems.org'
+gem 'choochoo', :git => 'https://github.com/renevanpelt/choochoo.git', :branch => 'master'
+
+EOF
+end
+
+def mainrb
+<<-EOF
+application = CQRS::Application.new
+
+require 'haml'
+require 'sinatra'
+
+before do
+   headers 'Access-Control-Allow-Origin' => '*', 
+            'Access-Control-Allow-Methods' => ['OPTIONS', 'GET', 'POST', 'PATCH']  
+end
+
+EOF
+end
+
 
 def create_directory(directory)
 
@@ -50,14 +77,25 @@ if command == "new"
       create_directory(app_name)
       create_directory("#{app_name}/config")
       create_file("#{app_name}/config/aggregate_database.rb", aggregate_database_schema_configuration)
-      create_file("#{app_name}/seeds.rb", aggregate_database_schema_configuration)
+      create_file("#{app_name}/seeds.rb", "")
+      create_file("#{app_name}/Gemfile", gemfile)
+      create_file("#{app_name}/main.rb", mainrb)
     end
   else
     puts "Please supply a name for your app like this: choo new [APP NAME]".red
   end
-else
-  puts "Command '#{command}' is unknown. 'new' is the only available command at this time.".red
-end
 
+
+# 
+# The server command
+# 
+
+elsif command == "server"
+
+  `rerun 'main.rb'`
+
+else
+  puts "Command '#{command}' is unknown. 'new' and 'server' are the only available command at this time.".red
+end
 
 
