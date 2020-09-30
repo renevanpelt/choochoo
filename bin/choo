@@ -1,0 +1,63 @@
+#!/usr/bin/env ruby
+
+require 'colorize'
+
+
+
+
+def aggregate_database_schema_configuration
+<<-EOF
+# This should not be configuration, therefore it explicitly is until the 
+# framework allows the user to manage their databases using migrations
+
+AggregateRecord::Schema.define do
+
+  self.verbose = true
+
+end
+EOF
+end
+
+def create_directory(directory)
+
+  FileUtils.mkdir_p directory
+  puts "Directory with name '#{directory}' created".green
+end
+
+def create_file(filename, content)
+
+  File.open(filename, 'w') do |file|
+    file.write content
+  end
+  puts "File with name '#{filename}' created".green
+
+
+end
+
+arguments = ARGV
+command = arguments.first
+
+# 
+# The new command
+# 
+
+if command == "new"
+  app_name = arguments[1]
+  if app_name
+    if File.directory?(app_name)
+      puts "Directory with name '#{app_name}' already exists".red
+    else
+      create_directory(app_name)
+      create_directory("#{app_name}/config")
+      create_file("#{app_name}/config/aggregate_database.rb", aggregate_database_schema_configuration)
+      create_file("#{app_name}/seeds.rb", aggregate_database_schema_configuration)
+    end
+  else
+    puts "Please supply a name for your app like this: choo new [APP NAME]".red
+  end
+else
+  puts "Command '#{command}' is unknown. 'new' is the only available command at this time.".red
+end
+
+
+
