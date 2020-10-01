@@ -5,9 +5,9 @@ Gem::Specification.new do |s|
   s.date = %q{2020-09-30}
   s.summary = %q{choochoo - web application framework using CQRS and event sourcing}
   s.files = [
-    "views/admin/layout.html.haml.rb",
-    "views/admin/home.html.haml.rb",
-    "views/admin/resource.html.haml.rb",
+    "views/admin/layout.html.haml",
+    "views/admin/home.html.haml",
+    "views/admin/resource.html.haml",
     "lib/choo.rb",
     "lib/choo/aggregate.rb",
     "lib/choo/application.rb",
