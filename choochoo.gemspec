@@ -10,6 +10,7 @@ Gem::Specification.new do |s|
     "lib/choo/application.rb",
     "lib/choo/base_command.rb",
     "lib/choo/base_event.rb",
+    "lib/choo/socket_manager.rb",
     "lib/choo/event.rb",
     "lib/choo/repository.rb",
     "lib/choo/resource.rb",
