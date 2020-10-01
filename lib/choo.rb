@@ -2,8 +2,6 @@ require 'active_record'
 require 'pusher'
 require 'yaml'
 
-puts "1233"
-puts "#-----"
 
 AggregateRecord = ActiveRecord
 EventRecord     = ActiveRecord
