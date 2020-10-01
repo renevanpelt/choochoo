@@ -100,6 +100,11 @@ before do
             'Access-Control-Allow-Methods' => ['OPTIONS', 'GET', 'POST', 'PATCH']  
 end
 
+get '/' do
+  "Hello world"
+end
+
+
 EOF
 end
 
