@@ -2,12 +2,16 @@ require 'active_record'
 require 'pusher'
 require 'yaml'
 
+puts "1233"
+puts "#-----"
 
 AggregateRecord = ActiveRecord
 EventRecord     = ActiveRecord
+puts "#-----"
 
 EventRecord::Base.establish_connection(adapter: 'sqlite3', database: 'THISNEEDSTOCHANGE.db')
 AggregateRecord::Base.establish_connection(adapter: 'sqlite3', database: 'THISNEEDSTOCHANGE_2.db')
+puts "#-----"
 
 require 'choo/aggregate'
 require 'choo/application'
