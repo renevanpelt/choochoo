@@ -10,7 +10,7 @@ puts "#-----"
 EventRecord::Base.establish_connection(adapter: 'sqlite3', database: 'THISNEEDSTOCHANGE.db')
 AggregateRecord::Base.establish_connection(adapter: 'sqlite3', database: 'THISNEEDSTOCHANGE_2.db')
 puts "#-d----"
-puts File.read("#{Gem.loaded_specs['choochoo'].gem_dir}/views/admin/layout.html.haml")
+puts File.read("#{Gem.loaded_specs['choochoo'].gem_dir}/lib/views/admin/layout.html.haml")
 
 
 require 'choo/aggregate'
