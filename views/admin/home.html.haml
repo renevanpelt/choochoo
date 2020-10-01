@@ -1,0 +1,13 @@
+
+%h2 Events
+%table.table
+  %tbody
+    - CQRS::Event.all.each do |event|
+      %tr
+        %td
+          = event.event_type
+          %p
+            %small= event.aggregate_id
+        %td
+          = event.payload
+        %td

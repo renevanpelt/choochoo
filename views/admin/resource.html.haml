@@ -1,0 +1,11 @@
+%h2 Resource #{resource}
+%table.table
+  %tbody
+    - resource.new.attributes.each do |attribute,value|
+      %th= attribute
+
+  %tbody
+    - resource.all.each do |entry|
+      %tr
+        - entry.attributes.each do |attribute,value|
+          %td= value
