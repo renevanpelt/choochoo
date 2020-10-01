@@ -5,7 +5,14 @@ Gem::Specification.new do |s|
   s.date = %q{2020-09-30}
   s.summary = %q{choochoo - web application framework using CQRS and event sourcing}
   s.files = [
-    "lib/choochoo.rb"
+    "lib/choo.rb",
+    "lib/choo/aggregate.rb",
+    "lib/choo/application.rb",
+    "lib/choo/base_command.rb",
+    "lib/choo/base_event.rb",
+    "lib/choo/event.rb",
+    "lib/choo/repository.rb",
+    "lib/choo/resource.rb",
   ]
   s.executables   = ["choo"]
 

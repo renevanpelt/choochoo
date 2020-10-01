@@ -9,6 +9,20 @@ EventRecord     = ActiveRecord
 EventRecord::Base.establish_connection(adapter: 'sqlite3', database: 'THISNEEDSTOCHANGE.db')
 AggregateRecord::Base.establish_connection(adapter: 'sqlite3', database: 'THISNEEDSTOCHANGE_2.db')
 
+require 'choo/aggregate'
+require 'choo/application'
+require 'choo/base_command'
+require 'choo/base_event'
+require 'choo/event'
+require 'choo/repository'
+require 'choo/resource'
+require 'choo/socket_manager'
+
+module Choo
+
+end
+
+
 # The aggregate database config are part of app config now but
 # will be managed by migrations later on.
 
