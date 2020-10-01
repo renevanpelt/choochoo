@@ -11,7 +11,8 @@ puts "#-----"
 
 EventRecord::Base.establish_connection(adapter: 'sqlite3', database: 'THISNEEDSTOCHANGE.db')
 AggregateRecord::Base.establish_connection(adapter: 'sqlite3', database: 'THISNEEDSTOCHANGE_2.db')
-puts "#-----"
+puts "#-d----"
+puts Gem.loaded_specs["mygem"].gem_dir
 puts Gem.loaded_specs["mygem"].gem_dir
 
 require 'choo/aggregate'
