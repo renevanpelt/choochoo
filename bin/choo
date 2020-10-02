@@ -15,7 +15,7 @@ AggregateRecord::Schema.define do
 
   create_table(:spaces, force: true) do |t|
     t.string      :uuid,             null: false
-    #{fields.map{|f| "t.#{f['type']}\t:#{f['name']}" }.join("\n    ")}
+    #{fields.map{|f| "t.#{f['type']}\t:#{f['field']}" }.join("\n    ")}
     t.datetime    :created_at,       null: false
     t.integer     :version,          null: false
   end
