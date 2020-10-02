@@ -78,13 +78,13 @@ def created_event_file(resource_name)
   capitalized_name = resource_name.split('_').collect(&:capitalize).join
 <<-EOF
 
-module CQRS
+module Choo
   module Resource
     module #{capitalized_name}
       module Events
 
 
-        class Created < CQRS::BaseEvent
+        class Created < Choo::BaseEvent
 
           def self.apply_to_aggregate(aggregate, payload = {})
             copy = aggregate
