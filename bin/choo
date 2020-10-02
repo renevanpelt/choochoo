@@ -44,6 +44,7 @@ application = Choo::Application.new
 
 require 'haml'
 require 'sinatra'
+require 'sinatra/base'
 
 before do
    headers 'Access-Control-Allow-Origin' => '*', 
@@ -98,7 +99,7 @@ if command == "new"
       create_file("#{app_name}/config/aggregate_database.rb", aggregate_database_schema_configuration)
       create_file("#{app_name}/seeds.rb", "")
       create_file("#{app_name}/Gemfile", gemfile)
-      create_file("#{app_name}/main.rb", mainrb)
+      create_file("#{app_name}/main.ru", mainrb)
     end
   else
     puts "Please supply a name for your app like this: choo new [APP NAME]".red
@@ -111,7 +112,7 @@ if command == "new"
 
 elsif command == "server"
 
-  `rerun 'main.rb'`
+  `rackup 'main.ru'`
 
 else
   puts "Command '#{command}' is unknown. 'new' and 'server' are the only available command at this time.".red

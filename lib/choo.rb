@@ -28,11 +28,11 @@ require 'sinatra/base'
 class AdminController < Sinatra::Base
 
   get "/admin" do 
-    Choo::Application.render_template( "#{GEM_DIR}/admin/home", {}, "#{GEM_DIR}/admin/layout")
+    Choo::Application.render_template( "#{GEM_DIR}/views/admin/home", {}, "#{GEM_DIR}/views/admin/layout")
   end
 
   get "/admin/:resource" do 
-    Choo::Application.render_template( "#{GEM_DIR}/admin/resource", {resource: params[:resource].capitalize.singularize.constantize}, "#{GEM_DIR}/admin/layout")
+    Choo::Application.render_template( "#{GEM_DIR}/views/admin/resource", {resource: params[:resource].capitalize.singularize.constantize}, "#{GEM_DIR}/admin/layout")
   end
 
 end
