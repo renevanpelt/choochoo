@@ -5,14 +5,11 @@ require 'yaml'
 
 AggregateRecord = ActiveRecord
 EventRecord     = ActiveRecord
-puts "#-----"
 
 EventRecord::Base.establish_connection(adapter: 'sqlite3', database: 'THISNEEDSTOCHANGE.db')
 AggregateRecord::Base.establish_connection(adapter: 'sqlite3', database: 'THISNEEDSTOCHANGE_2.db')
-puts "#-d----"
-puts Dir.glob("#{Gem.loaded_specs['choochoo'].gem_dir}/*")
-puts File.read("#{Gem.loaded_specs['choochoo'].gem_dir}/views/admin/layout.html.haml")
 
+GEM_DIR = Gem.loaded_specs['choochoo'].gem_dir
 
 require 'choo/aggregate'
 require 'choo/application'
@@ -25,8 +22,24 @@ require 'choo/socket_manager'
 
 module Choo
 
+  self.base_dir
+
 end
 
+require 'sinatra/base'
+
+class AdminController < Sinatra::Base
+
+  get "/admin" do 
+    application.render_template( "#{GEM_DIR}/admin/home", {}, "#{GEM_DIR}/admin/layout")
+  end
+
+  get "/admin/:resource" do 
+    application.render_template( "#{GEM_DIR}/admin/resource", {resource: params[:resource].capitalize.singularize.constantize}, "#{GEM_DIR}/admin/layout")
+  end
+
+
+end
 
 # The aggregate database config are part of app config now but
 # will be managed by migrations later on.
