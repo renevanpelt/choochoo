@@ -1,0 +1,10 @@
+
+%h1 Resources
+%table.table
+  %tbody
+
+    - Choo::Application.resources.each do |resource|
+      - methods.each do |method, route|
+        %tr
+          %td
+            %a{href: "/admin/#{resource}"}= resource
