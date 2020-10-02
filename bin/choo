@@ -257,7 +257,7 @@ elsif command == "generate" || command == "g"
     puts resource_to_generate
     create_directory("resources/#{resource_to_generate}")
 
-    create_file("resources/#{resource_to_generate}", model_file(resource_to_generate, validated_fields))
+    create_file("resources/#{resource_to_generate}/#{resource_to_generate.singularize}.rb", model_file(resource_to_generate, validated_fields))
 
 
 
