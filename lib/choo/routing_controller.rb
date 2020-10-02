@@ -12,7 +12,7 @@ module Choo
         end
     Choo::Application.routes.each do |route|
 
-      if routes[:method] == 'get'
+      if routes['method'] == 'get'
         puts "asdfasdfasfd"
         get "/" do
           "Hello world"
