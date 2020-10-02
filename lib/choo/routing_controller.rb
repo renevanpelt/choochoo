@@ -23,13 +23,13 @@ module Choo
     puts Choo::Application.routes.inspect
     Choo::Application.routes.each do |route|
 
-      if routes['method'] == 'get'
+      if routes['get'].present?
         puts "asdfasdfasfd"
         get "/" do
           "Hello world"
         end
         
-      elsif routes[:method] == 'post'
+      elsif routes["post"].present?
 
       end
     end
