@@ -221,7 +221,7 @@ if command == "new"
       create_directory("#{app_name}/config")
       create_directory("#{app_name}/resources")
       create_file("#{app_name}/config/aggregate_database.rb", aggregate_database_schema_configuration)
-      create_file("#{app_name}/seeds.rb",   )
+      create_file("#{app_name}/seeds.rb",  "" )
       create_file("#{app_name}/Gemfile", gemfile)
       create_file("#{app_name}/main.ru", mainrb)
       create_file("#{app_name}/config/routes.yml", routesyml)
