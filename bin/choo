@@ -45,7 +45,7 @@ end
 
 
 
-def create_command_file(resource_name)
+def create_command_file(resource_name,fields)
   capitalized_name = resource_name.split('_').collect(&:capitalize).join
 <<-EOF
 module Choo
@@ -56,7 +56,7 @@ module Choo
 
           def schema
             Parametric::Schema.new do
-              # field(:name).type(:string).present
+              #{fields.map{|f| "field(:#{f['field']}).type(:#{f['type']}).present" }.join("\n              ")}
               # field(:#{resource_name}_type).options(#{capitalized_name}Types.symbols).default(#{capitalized_name}Types.default)
             end
           end
@@ -73,7 +73,7 @@ end
 EOF
 end
 
-def created_event_file(resource_name)
+def created_event_file(resource_name,fields)
 
   capitalized_name = resource_name.split('_').collect(&:capitalize).join
 <<-EOF
@@ -88,7 +88,7 @@ module Choo
 
           def self.apply_to_aggregate(aggregate, payload = {})
             copy = aggregate
-            # copy.fields['name'] = payload['name']
+            #{fields.map{|f| "copy.fields['#{f['field']}'] = payload['#{f['type']}']" }.join("\n            ")}
             return copy 
           end
 
@@ -269,8 +269,8 @@ elsif command == "generate" || command == "g"
     create_directory("resources/#{resource_to_generate}/commands")
     create_directory("resources/#{resource_to_generate}/events")
     create_file("resources/#{resource_to_generate}/#{resource_to_generate.singularize}.rb", model_file(resource_to_generate, validated_fields))
-    create_file("resources/#{resource_to_generate}/events/created.rb", create_command_file(resource_to_generate))
-    create_file("resources/#{resource_to_generate}/commands/create.rb", created_event_file(resource_to_generate))
+    create_file("resources/#{resource_to_generate}/events/created.rb", create_command_file(resource_to_generate, validated_fields))
+    create_file("resources/#{resource_to_generate}/commands/create.rb", created_event_file(resource_to_generate, validated_fields))
 
   else
     puts "Don't know how to generate '#{command}'. At this time only resources can be generated using 'choo g resource'.".red
