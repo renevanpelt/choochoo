@@ -3,6 +3,96 @@
 require 'colorize'
 
 
+def model_file(resource_name,fields)
+<<-EOF
+# This should not be configuration, therefore it explicitly is until the 
+# framework allows the user to manage their databases using migrations
+
+AggregateRecord::Schema.define do
+
+  self.verbose = true
+
+  create_table(:spaces, force: true) do |t|
+    t.string      :uuid,             null: false
+    #{fields.map{|f| "t.#{f['type']}\t:#{f['name']}" }.join("\n    ")}
+    t.datetime    :created_at,       null: false
+    t.integer     :version,          null: false
+  end
+end
+EOF
+end
+
+
+
+def create_command_file(resource_name)
+  capitalized_name = resource_name.split('_').collect(&:capitalize).join
+<<-EOF
+module Choo
+  module Resource
+    module #{capitalized_name}
+      module Command
+        class Create < Choo::BaseCommand
+
+          def schema
+            Parametric::Schema.new do
+              # field(:name).type(:string).present
+              # field(:#{resource_name}_type).options(#{capitalized_name}Types.symbols).default(#{capitalized_name}Types.default)
+            end
+          end
+
+          def event_type
+            Choo::Resource::#{capitalized_name}::Events::Created
+          end
+
+        end
+      end
+    end
+  end
+end
+EOF
+end
+
+def created_event_file(resource_name)
+
+  capitalized_name = resource_name.split('_').collect(&:capitalize).join
+<<-EOF
+
+module CQRS
+  module Resource
+    module #{capitalized_name}
+      module Events
+
+
+        class Created < CQRS::BaseEvent
+
+          def self.apply_to_aggregate(aggregate, payload = {})
+            copy = aggregate
+            # copy.fields['name'] = payload['name']
+            return copy 
+          end
+
+          def self.publish_to
+            self
+          end
+
+          def perform(event)
+            #{capitalized_name}.create!(
+              # name: event.payload["name"],
+              uuid: event.aggregate_id,
+              version: event.version
+            )
+          end
+        end
+      end
+    end
+  end
+end
+EOF
+end
+
+
+
+
 
 
 def aggregate_database_schema_configuration
@@ -109,6 +199,7 @@ if command == "new"
     else
       create_directory(app_name)
       create_directory("#{app_name}/config")
+      create_directory("#{app_name}/resources")
       create_file("#{app_name}/config/aggregate_database.rb", aggregate_database_schema_configuration)
       create_file("#{app_name}/seeds.rb", "")
       create_file("#{app_name}/Gemfile", gemfile)
@@ -137,11 +228,21 @@ elsif command == "generate" || command == "g"
 
     fields = arguments[2..-1]
     puts fields.inspect
-
+    validated_fields = []
     fields.each do |field|
-      puts field.inspect
+      parts = field.split(":")
+      if parts.count == 2
+        name, type = parts
+        validated_fields  << {name: name, type: type}
+      else
+        raise StandardError
+      end
+
+
     end
 
+    create_directory("#{app_name}/resources/#{what_to_generate}")
+    create_file("#{app_name}/resources/#{what_to_generate}", model_file(what_to_generate, validated_fields))
 
 
 
