@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
   s.add_dependency "sinatra"
   s.add_dependency "haml"
   s.add_dependency "activerecord"
+  s.add_dependency "activesupport"
   s.add_dependency "colorize"
   s.add_dependency "fileutils"
   s.add_dependency "rack"
