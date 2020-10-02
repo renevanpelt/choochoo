@@ -59,6 +59,21 @@ run Choo::RoutingController
 EOF
 end
 
+def routesyml
+<<-EOF
+
+
+routes:
+  /:
+    get:
+      summary: Home page
+      response: Hello, world!
+
+
+
+EOF
+end
+
 
 
 
@@ -98,6 +113,7 @@ if command == "new"
       create_file("#{app_name}/seeds.rb", "")
       create_file("#{app_name}/Gemfile", gemfile)
       create_file("#{app_name}/main.ru", mainrb)
+      create_file("#{app_name}/config/routes.yml", routesyml)
     end
   else
     puts "Please supply a name for your app like this: choo new [APP NAME]".red
