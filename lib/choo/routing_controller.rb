@@ -25,6 +25,8 @@ module Choo
 
       if route['get'].present?
         puts "asdfasdfasfd"
+        puts route
+        puts path
         get "/" do
           route["response"]
         end
