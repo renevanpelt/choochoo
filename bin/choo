@@ -240,7 +240,7 @@ elsif command == "generate" || command == "g"
 
 
     end
-
+    puts "Asdasdfdsaf"
     create_directory("#{app_name}/resources/#{what_to_generate}")
     create_file("#{app_name}/resources/#{what_to_generate}", model_file(what_to_generate, validated_fields))
 
