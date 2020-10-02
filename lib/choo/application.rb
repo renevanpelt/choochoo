@@ -45,7 +45,7 @@ module Choo
     end
 
     def self.routes
-      routes = Yaml.load(File.open("./config/routes.yml"))['routes']
+      routes = YAML.load(File.open("./config/routes.yml"))['routes']
       returnvalue = []
 
       routes.each do |k,r|
