@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
   s.add_dependency "activerecord"
   s.add_dependency "colorize"
   s.add_dependency "fileutils"
+  s.add_dependency "rackup"
   s.add_dependency "rerun"
 
 

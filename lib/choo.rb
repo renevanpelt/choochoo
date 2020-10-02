@@ -1,4 +1,4 @@
-require 'active_record'
+
 require 'pusher'
 require 'yaml'
 
