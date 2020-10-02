@@ -3,10 +3,13 @@
 %table.table
   %tbody
 
-    - Choo::Application.routes.each do |path, route|
-      %tr
-        %td
-          = path
-        %td
-          = route["summary"]
+    - Choo::Application.routes.each do |path, methods|
+      - methods.each do |method, route|
+        %tr
+          %td
+            = method.upcase
+          %td
+            = path
+          %td
+            = route["summary"]
 
