@@ -2,6 +2,17 @@ require 'active_record'
 require 'pusher'
 require 'yaml'
 
+require 'choo/aggregate'
+require 'choo/application'
+require 'choo/base_command'
+require 'choo/base_event'
+require 'choo/event'
+require 'choo/repository'
+require 'choo/resource'
+require 'choo/socket_manager'
+require 'choo/routing_controller'
+
+
 
 AggregateRecord = ActiveRecord
 EventRecord     = ActiveRecord
@@ -11,29 +22,18 @@ AggregateRecord::Base.establish_connection(adapter: 'sqlite3', database: 'THISNE
 
 GEM_DIR = Gem.loaded_specs['choochoo'].gem_dir
 
-require 'choo/aggregate'
-require 'choo/application'
-require 'choo/base_command'
-require 'choo/base_event'
-require 'choo/event'
-require 'choo/repository'
-require 'choo/resource'
-require 'choo/socket_manager'
-
-
 
 require 'sinatra/base'
 
 class AdminController < Sinatra::Base
 
   get "/admin" do 
-    application.render_template( "#{GEM_DIR}/admin/home", {}, "#{GEM_DIR}/admin/layout")
+    Choo::Application.render_template( "#{GEM_DIR}/admin/home", {}, "#{GEM_DIR}/admin/layout")
   end
 
   get "/admin/:resource" do 
-    application.render_template( "#{GEM_DIR}/admin/resource", {resource: params[:resource].capitalize.singularize.constantize}, "#{GEM_DIR}/admin/layout")
+    Choo::Application.render_template( "#{GEM_DIR}/admin/resource", {resource: params[:resource].capitalize.singularize.constantize}, "#{GEM_DIR}/admin/layout")
   end
-
 
 end
 
@@ -64,18 +64,6 @@ end
 
 
 class AggregateRecord::Base
-
-
-  # notify is a silly function that was needed in the 
-  # very early stages of development of the framework
-  # and might be handy for W-M to see what happens.
-  # Can be removed.
-
-  after_create :notify
-
-  def notify
-    puts "#{self.class} created"
-  end
 
   def to_param
     uuid

@@ -50,7 +50,7 @@ module Choo
     end
 
 
-    def render_template(view, locals = {}, layout= nil)
+    def self.render_template(view, locals = {}, layout= nil)
       locals = {application: self}.merge(locals)
       view =  Haml::Engine.new(open("#{view}.html.haml").read).render(Object.new,locals)
       if layout

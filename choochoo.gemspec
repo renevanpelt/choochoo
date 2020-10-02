@@ -12,6 +12,7 @@ Gem::Specification.new do |s|
     "lib/choo/aggregate.rb",
     "lib/choo/application.rb",
     "lib/choo/base_command.rb",
+    "lib/choo/routing_controller.rb",
     "lib/choo/base_event.rb",
     "lib/choo/socket_manager.rb",
     "lib/choo/event.rb",
