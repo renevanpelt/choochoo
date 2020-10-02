@@ -10,6 +10,17 @@ module Choo
          get "/a" do
           "Hello adsworld"
         end
+    puts "!!!!!!!!!!!!!!"
+    puts "!!!!!!!!!!!!!!"
+    puts "!!!!!!!!!!!!!!"
+    puts "!!!!!!!!!!!!!!"
+    puts "!!!!!!!!!!!!!!"
+    puts "!!!!!!!!!!!!!!"
+    puts "!!!!!!!!!!!!!!"
+    puts Choo::Application.routes.inspect
+    puts Choo::Application.routes.inspect
+    puts Choo::Application.routes.inspect
+    puts Choo::Application.routes.inspect
     Choo::Application.routes.each do |route|
 
       if routes['method'] == 'get'
