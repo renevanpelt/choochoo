@@ -246,8 +246,11 @@ elsif command == "generate" || command == "g"
 
     end
     puts "Asdasdfdsaf"
+    puts resource_to_generate
+    puts resource_to_generate
+    puts resource_to_generate
     create_directory("#{app_name}/resources/#{resource_to_generate}")
-    create_directory("#{app_name}/resources/#{resource_to_generate}")
+
     create_file("#{app_name}/resources/#{resource_to_generate}", model_file(resource_to_generate, validated_fields))
 
 
