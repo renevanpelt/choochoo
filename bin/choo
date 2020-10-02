@@ -26,7 +26,7 @@ AggregateRecord::Schema.define do
 end
 
 
-class #{capitalized_name} < AggregateRecord::Base
+class #{capitalized_name.singularize} < AggregateRecord::Base
 
   belongs_to :collection, foreign_key: "collection_uuid", class_name: "Collection", primary_key: 'uuid'
 
@@ -190,13 +190,6 @@ end
 
 
 def create_directory(directory)
-  puts directory
-  puts directory
-  puts directory
-  puts 'directory'
-  puts directory
-  puts directory
-  puts directory
   FileUtils.mkdir_p directory
   puts "Directory with name '#{directory}' created".green
 end
@@ -228,7 +221,7 @@ if command == "new"
       create_directory("#{app_name}/config")
       create_directory("#{app_name}/resources")
       create_file("#{app_name}/config/aggregate_database.rb", aggregate_database_schema_configuration)
-      create_file("#{app_name}/seeds.rb", "")
+      create_file("#{app_name}/seeds.rb",   )
       create_file("#{app_name}/Gemfile", gemfile)
       create_file("#{app_name}/main.ru", mainrb)
       create_file("#{app_name}/config/routes.yml", routesyml)
@@ -252,51 +245,26 @@ elsif command == "generate" || command == "g"
   what_to_generate = arguments[1]
 
   if what_to_generate == "resource"
-    puts resource_to_generate = arguments[2]
-    puts what_to_generate
-    puts what_to_generate
-    puts what_to_generate
-    puts what_to_generate
-    puts what_to_generate
+    resource_to_generate = arguments[2]
     fields = arguments[3..-1]
-    puts fields.inspect
     validated_fields = []
     fields.each do |field|
       parts = field.split(":")
       if parts.count == 2
-        puts parts
-        puts parts
-        puts parts
-        puts parts
-        puts "parts"
-        puts "parts"
-        puts "parts"
-        puts "parts"
-        puts "parts"
         name = parts[0]
         type = parts[1]
         validated_fields  << {'field' => name, 'type' => type}
       else
         raise StandardError
       end
-
-
     end
-    puts "Asdasdfdsaf"
-    puts resource_to_generate
-    puts resource_to_generate
-    puts resource_to_generate
+
     create_directory("resources/#{resource_to_generate}")
-
     create_file("resources/#{resource_to_generate}/#{resource_to_generate.singularize}.rb", model_file(resource_to_generate, validated_fields))
-
-
 
   else
     puts "Don't know how to generate '#{command}'. At this time only resources can be generated using 'choo g resource'.".red
-
   end
-
 
 else
   puts "Command '#{command}' is unknown. 'new' and 'server' are the only available command at this time.".red
