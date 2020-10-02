@@ -1,3 +1,4 @@
+require 'yaml'
 module Choo
   class Application
 
