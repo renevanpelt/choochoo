@@ -9,6 +9,7 @@ Gem::Specification.new do |s|
     "views/admin/routes.html.haml",
     "views/admin/home.html.haml",
     "views/admin/resource.html.haml",
+    "views/admin/resources.html.haml",
     "lib/choo.rb",
     "lib/choo/aggregate.rb",
     "lib/choo/application.rb",
