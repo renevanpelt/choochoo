@@ -226,7 +226,7 @@ elsif command == "generate" || command == "g"
 
   if what_to_generate == "resource"
 
-    fields = arguments[2..-1]
+    fields = arguments[3..-1]
     puts fields.inspect
     validated_fields = []
     fields.each do |field|
