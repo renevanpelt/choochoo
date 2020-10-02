@@ -5,6 +5,7 @@ require 'active_support/inflector'
 
 
 def model_file(resource_name,fields)
+  capitalized_name = resource_name.split('_').collect(&:capitalize).join
 <<-EOF
 # This should not be configuration, therefore it explicitly is until the 
 # framework allows the user to manage their databases using migrations
@@ -13,13 +14,32 @@ AggregateRecord::Schema.define do
 
   self.verbose = true
 
-  create_table(:spaces, force: true) do |t|
+  create_table(:#{resource_name}, force: true) do |t|
     t.string      :uuid,             null: false
-    #{fields.map{|f| "t.#{f['type']}\t:#{f['field']}" }.join("\n    ")}
+    #{fields.map{|f| "t.#{f['type']}\t\t:#{f['field']}" }.join("\n    ")}
     t.datetime    :created_at,       null: false
     t.integer     :version,          null: false
   end
+
+
+
 end
+
+
+class #{capitalized_name} < AggregateRecord::Base
+
+  belongs_to :collection, foreign_key: "collection_uuid", class_name: "Collection", primary_key: 'uuid'
+
+  def serialize_to_json
+    {
+      id: uuid,
+      name: name,
+      field_type: field_type
+    }
+  end
+
+end
+
 EOF
 end
 
