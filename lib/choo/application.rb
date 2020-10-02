@@ -53,7 +53,7 @@ module Choo
           returnvalue << {method: 'get', response: r['response'], route: "/"}
         end
         if r['post'].present?
-
+          returnvalue << {method: 'get', response: r['response'], route: "/"}
         end
       end
 

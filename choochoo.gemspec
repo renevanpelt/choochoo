@@ -6,6 +6,7 @@ Gem::Specification.new do |s|
   s.summary = %q{choochoo - web application framework using CQRS and event sourcing}
   s.files = [
     "views/admin/layout.html.haml",
+    "views/admin/routes.html.haml",
     "views/admin/home.html.haml",
     "views/admin/resource.html.haml",
     "lib/choo.rb",

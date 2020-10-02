@@ -172,13 +172,21 @@ end
 
 def routesyml
 <<-EOF
-
-
 routes:
   /:
     get:
       summary: Home page
       response: Hello, world!
+
+  /about:
+    get:
+      summary: Home page
+      response: This is the about page
+
+  /about:
+    post:
+      summary: Home page
+      response: This is the about page
 
 
 
