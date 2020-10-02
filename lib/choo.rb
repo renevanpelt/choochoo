@@ -1,4 +1,4 @@
-
+require 'active_record'
 
 AggregateRecord = ActiveRecord
 EventRecord     = ActiveRecord
