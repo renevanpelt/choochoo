@@ -1,7 +1,4 @@
 
-require 'pusher'
-require 'yaml'
-
 
 AggregateRecord = ActiveRecord
 EventRecord     = ActiveRecord

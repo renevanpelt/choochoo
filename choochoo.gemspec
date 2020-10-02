@@ -25,6 +25,8 @@ Gem::Specification.new do |s|
   s.add_dependency "colorize"
   s.add_dependency "fileutils"
   s.add_dependency "rack"
+  s.add_dependency "yaml"
+  s.add_dependency "pusher"
   s.add_dependency "rerun"
 
 
