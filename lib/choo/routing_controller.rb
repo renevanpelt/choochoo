@@ -27,8 +27,8 @@ module Choo
         puts "asdfasdfasfd"
         puts route
         puts path
-        get "/" do
-          route["response"]
+        get path do
+          route["get"]["response"]
         end
         
       elsif route["post"].present?
