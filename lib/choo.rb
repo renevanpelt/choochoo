@@ -32,12 +32,12 @@ class AdminController < Sinatra::Base
     Choo::Application.render_template( "#{GEM_DIR}/views/admin/routes", {}, "#{GEM_DIR}/views/admin/layout")
   end
 
-  get "/admin/:resource" do 
-    Choo::Application.render_template( "#{GEM_DIR}/views/admin/resource", {resource: params[:resource].capitalize.singularize.constantize}, "#{GEM_DIR}/views/admin/layout")
-  end
-
   get "/admin/resources" do 
     Choo::Application.render_template( "#{GEM_DIR}/views/admin/resources", {}, "#{GEM_DIR}/views/admin/layout")
+  end
+
+  get "/admin/:resource" do 
+    Choo::Application.render_template( "#{GEM_DIR}/views/admin/resource", {resource: params[:resource].capitalize.singularize.constantize}, "#{GEM_DIR}/views/admin/layout")
   end
 
 end
