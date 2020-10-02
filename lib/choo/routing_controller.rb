@@ -26,7 +26,7 @@ module Choo
       if route['get'].present?
         puts "asdfasdfasfd"
         get "/" do
-          "Hello world"
+          route["response"]
         end
         
       elsif route["post"].present?
