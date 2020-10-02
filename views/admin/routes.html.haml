@@ -2,7 +2,10 @@
 %h1 Routes
 %table.table
   %tbody
-    - Choo::Application.routes.each do |route|
+    - Choo::Application.routes.each do |path, route|
       %tr
         %td
-          = route.inspect
+          = path
+        %td
+          = route["summary"]
+

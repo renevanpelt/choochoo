@@ -180,12 +180,10 @@ routes:
 
   /about:
     get:
-      summary: Home page
+      summary: About page
       response: This is the about page
-
-  /about:
     post:
-      summary: Home page
+      summary: About POST
       response: This is the about page
 
 
