@@ -135,9 +135,12 @@ elsif command == "generate" || command == "g"
 
   if what_to_generate == "resource"
 
-    fields = arguments[1..-1]
+    fields = arguments[2..-1]
     puts fields.inspect
 
+    fields.each do |field|
+      puts field.inspect
+    end
 
 
 
