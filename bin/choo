@@ -244,8 +244,18 @@ elsif command == "generate" || command == "g"
     fields.each do |field|
       parts = field.split(":")
       if parts.count == 2
-        name, type = parts
-        validated_fields  << {name: name, type: type}
+        puts parts
+        puts parts
+        puts parts
+        puts parts
+        puts "parts"
+        puts "parts"
+        puts "parts"
+        puts "parts"
+        puts "parts"
+        name = parts[0]
+        type = parts[1]
+        validated_fields  << {'field' => name, 'type' => type}
       else
         raise StandardError
       end
