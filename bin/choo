@@ -266,7 +266,11 @@ elsif command == "generate" || command == "g"
     end
 
     create_directory("resources/#{resource_to_generate}")
+    create_directory("resources/#{resource_to_generate}/commands")
+    create_directory("resources/#{resource_to_generate}/events")
     create_file("resources/#{resource_to_generate}/#{resource_to_generate.singularize}.rb", model_file(resource_to_generate, validated_fields))
+    create_file("resources/#{resource_to_generate}/events/created.rb", create_command_file(resource_to_generate))
+    create_file("resources/#{resource_to_generate}/commands/create.rb", created_event_file(resource_to_generate))
 
   else
     puts "Don't know how to generate '#{command}'. At this time only resources can be generated using 'choo g resource'.".red
