@@ -50,7 +50,7 @@ module Choo
 
       routes.each do |k,r|
         if r['get'].present?
-          returnvalue << {method: 'get', response: r['response'], route: k}
+          returnvalue << {method: 'get', response: r['response'], route: "/"}
         end
         if r['post'].present?
 
