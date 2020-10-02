@@ -47,9 +47,9 @@ module Choo
       routes = Yaml.load(File.open("./config/routes.yml"))['routes']
       returnvalue = []
 
-      routes.each do |r|
+      routes.each do |k,r|
         if r['get'].present?
-          returnvalue << {method: 'get', response: r['response']}
+          returnvalue << {method: 'get', response: r['response'], route: k}
         end
         if r['post'].present?
 

@@ -7,13 +7,13 @@ require 'sinatra/base'
 
 module Choo
   class RoutingController < Sinatra::Base
-    get '/' do
-      "Hello world"
-    end
-    
     
     Choo::Application.routes.each do |route|
       if routes[:method] == 'get'
+
+        get routes[:route] do
+          "Hello world"
+        end
         
       elsif routes[:method] == 'post'
 
