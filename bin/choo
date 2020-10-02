@@ -169,7 +169,13 @@ end
 
 
 def create_directory(directory)
-
+  puts directory
+  puts directory
+  puts directory
+  puts 'directory'
+  puts directory
+  puts directory
+  puts directory
   FileUtils.mkdir_p directory
   puts "Directory with name '#{directory}' created".green
 end
