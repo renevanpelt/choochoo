@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
   s.executables   = ["choo"]
 
   s.add_dependency "sqlite3"
+  s.add_dependency "sinatra"
   s.add_dependency "activerecord"
   s.add_dependency "colorize"
   s.add_dependency "fileutils"
