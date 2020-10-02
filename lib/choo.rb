@@ -20,11 +20,7 @@ require 'choo/repository'
 require 'choo/resource'
 require 'choo/socket_manager'
 
-module Choo
 
-  self.base_dir
-
-end
 
 require 'sinatra/base'
 
