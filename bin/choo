@@ -33,9 +33,7 @@ def mainrb
 <<-EOF
 
 
-require 'active_record'
-require 'pusher'
-require 'yaml'
+
 require 'choo'
 
 
