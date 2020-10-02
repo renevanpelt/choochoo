@@ -2,17 +2,6 @@ require 'active_record'
 require 'pusher'
 require 'yaml'
 
-require 'choo/aggregate'
-require 'choo/application'
-require 'choo/base_command'
-require 'choo/base_event'
-require 'choo/event'
-require 'choo/repository'
-require 'choo/resource'
-require 'choo/socket_manager'
-require 'choo/routing_controller'
-
-
 
 AggregateRecord = ActiveRecord
 EventRecord     = ActiveRecord
@@ -21,6 +10,17 @@ EventRecord::Base.establish_connection(adapter: 'sqlite3', database: 'THISNEEDST
 AggregateRecord::Base.establish_connection(adapter: 'sqlite3', database: 'THISNEEDSTOCHANGE_2.db')
 
 GEM_DIR = Gem.loaded_specs['choochoo'].gem_dir
+
+require 'choo/aggregate'
+require 'choo/application'
+require 'choo/base_command'
+require 'choo/base_event'
+require 'choo/event'
+require 'choo/repository'
+require 'choo/resource'
+require 'choo/socket_manager'
+
+require 'choo/routing_controller'
 
 
 require 'sinatra/base'
