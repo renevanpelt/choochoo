@@ -1,12 +1,11 @@
 module Choo
   class Application
 
-    attr_accessor :resources
 
 
-    def initialize
 
-      self.resources = []
+
+      @@resources = []
 
 
       # We load the user defined helper classes 
@@ -28,7 +27,7 @@ module Choo
 
         require "./resources/#{resource_name}/#{resource_name.singularize}.rb"
         
-        self.resources << resource_name.to_sym
+        @@resources << resource_name.to_sym
         
         # Load the commands associated with this resource
 
@@ -46,7 +45,8 @@ module Choo
 
 
 
-
+    def self.resources
+      @@resources
     end
 
 
