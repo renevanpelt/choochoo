@@ -225,7 +225,12 @@ elsif command == "generate" || command == "g"
   what_to_generate = arguments[1]
 
   if what_to_generate == "resource"
-
+    puts resource_to_generate = arguments[2]
+    puts what_to_generate
+    puts what_to_generate
+    puts what_to_generate
+    puts what_to_generate
+    puts what_to_generate
     fields = arguments[3..-1]
     puts fields.inspect
     validated_fields = []
@@ -241,8 +246,9 @@ elsif command == "generate" || command == "g"
 
     end
     puts "Asdasdfdsaf"
-    create_directory("#{app_name}/resources/#{what_to_generate}")
-    create_file("#{app_name}/resources/#{what_to_generate}", model_file(what_to_generate, validated_fields))
+    create_directory("#{app_name}/resources/#{resource_to_generate}")
+    create_directory("#{app_name}/resources/#{resource_to_generate}")
+    create_file("#{app_name}/resources/#{resource_to_generate}", model_file(resource_to_generate, validated_fields))
 
 
 
