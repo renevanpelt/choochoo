@@ -125,8 +125,28 @@ if command == "new"
 # 
 
 elsif command == "server"
+  parameter_string = arguments[1..-1].join(" ")
+  `rackup main.ru #{parameter_string}`
 
-  `rackup 'main.ru'`
+elsif command == "generate" || command == "g"
+
+
+  what_to_generate = arguments[1]
+
+  if what_to_generate == "resource"
+
+    fields = arguments[1..-1]
+    puts fields.inspect
+
+
+
+
+
+  else
+    puts "Don't know how to generate '#{command}'. At this time only resources can be generated using 'choo g resource'.".red
+
+  end
+
 
 else
   puts "Command '#{command}' is unknown. 'new' and 'server' are the only available command at this time.".red
