@@ -21,7 +21,7 @@ module Choo
     puts Choo::Application.routes.inspect
     puts Choo::Application.routes.inspect
     puts Choo::Application.routes.inspect
-    Choo::Application.routes.each do |route|
+    Choo::Application.routes.each do |path, route|
 
       if route['get'].present?
         puts "asdfasdfasfd"
