@@ -36,7 +36,7 @@
               %th= attribute
 
           %tbody
-            - resource.all.each do |entry|
+            - resource.capitalize.singularize.constantize.all.each do |entry|
               %tr
                 - entry.attributes.each do |attribute,value|
                   %td= value
