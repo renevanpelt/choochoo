@@ -5,20 +5,38 @@
     .card
       .card-header Events
       .card-body
-        = Choo::Application.resources.inspect
 
+
+        %table.table
+          %thead
+            %tbody
+              - Choo::Application.resources[resource.to_sym][:events].each do |event|
+                %tr
+                  %td= event
   .col-md-6
     .card
       .card-header Commands
       .card-body
-        
-%table.table
-  %tbody
-    - resource.new.attributes.each do |attribute,value|
-      %th= attribute
 
-  %tbody
-    - resource.all.each do |entry|
-      %tr
-        - entry.attributes.each do |attribute,value|
-          %td= value
+        %table.table
+          %thead
+            %tbody
+              - Choo::Application.resources[resource.to_sym][:commands].each do |command|
+                %tr
+                  %td= command
+        
+  .col-md-12.mt-4
+    .card
+      .card-header Entries
+      .card-body
+                
+        %table.table
+          %thead
+            - resource.new.attributes.each do |attribute,value|
+              %th= attribute
+
+          %tbody
+            - resource.all.each do |entry|
+              %tr
+                - entry.attributes.each do |attribute,value|
+                  %td= value
