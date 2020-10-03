@@ -28,17 +28,19 @@ module Choo
 
       require "./resources/#{resource_name}/#{resource_name.singularize}.rb"
       
-      @@resources << resource_name.to_sym
+      @@resources[resource_name.to_sym] = {events: [], commands: []}
       
       # Load the commands associated with this resource
 
       Dir.glob("./resources/#{resource_name}/commands/*.rb") do |command_file|
+        @@resources[resource_name.to_sym][:commands] << command_file[0...-3]
         require command_file
       end
       
       # Load the events associated with this resource
       
       Dir.glob("./resources/#{resource_name}/events/*.rb") do |event_file|
+        @@resources[resource_name.to_sym][:events] << event_file[0...-3]
         require event_file
       end
 

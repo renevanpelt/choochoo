@@ -3,7 +3,8 @@
 %table.table
   %tbody
 
-    - Choo::Application.resources.each do |resource|
+    - Choo::Application.resources.each do |resource, data|
       %tr
         %td
           %a{href: "/admin/resources/#{resource}"}= resource
+        %td= data.inspect

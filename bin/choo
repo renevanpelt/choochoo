@@ -138,6 +138,7 @@ def gemfile
 
 source 'https://rubygems.org'
 gem 'choochoo', :git => 'https://github.com/renevanpelt/choochoo.git', :branch => 'master'
+gem 'parametric'
 
 EOF
 end
