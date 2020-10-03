@@ -7,4 +7,9 @@
       %tr
         %td
           %a{href: "/admin/resources/#{resource}"}= resource
-        %td= data.inspect
+        %td
+          = data["events"].count
+          events
+        %td
+          = data["commands"]
+          commands

@@ -33,14 +33,14 @@ module Choo
       # Load the commands associated with this resource
 
       Dir.glob("./resources/#{resource_name}/commands/*.rb") do |command_file|
-        @@resources[resource_name.to_sym][:commands] << command_file[0...-3]
+        @@resources[resource_name.to_sym][:commands] << command_file[0...-3].split("/").last
         require command_file
       end
       
       # Load the events associated with this resource
       
       Dir.glob("./resources/#{resource_name}/events/*.rb") do |event_file|
-        @@resources[resource_name.to_sym][:events] << event_file[0...-3]
+        @@resources[resource_name.to_sym][:events] << event_file[0...-3].split("/").last
         require event_file
       end
 
