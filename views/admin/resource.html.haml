@@ -1,4 +1,17 @@
 %h2 Resource #{resource}
+
+.row
+  .col-md-6
+    .card
+      .card-header Events
+      .card-body
+        = Choo::Application.resources.inspect
+
+  .col-md-6
+    .card
+      .card-header Commands
+      .card-body
+        
 %table.table
   %tbody
     - resource.new.attributes.each do |attribute,value|
