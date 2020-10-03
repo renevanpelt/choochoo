@@ -32,7 +32,7 @@
                 
         %table.table
           %thead
-            - resource.new.attributes.each do |attribute,value|
+            - resource.capitalize.singularize.constantize.new.attributes.each do |attribute,value|
               %th= attribute
 
           %tbody
