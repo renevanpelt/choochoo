@@ -6,7 +6,7 @@ module Choo
 
 
 
-    @@resources = []
+    @@resources = {}
 
 
     # We load the user defined helper classes 
