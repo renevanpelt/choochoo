@@ -1,13 +1,61 @@
+.row
+  .col-md-12
+    %h1 Admin dashboard
 
-%h2 Events
-%table.table
-  %tbody
-    - Choo::Event.all.each do |event|
-      %tr
-        %td
-          = event.event_type
-          %p
-            %small= event.aggregate_id
-        %td
-          = event.payload
-        %td
+    %p Welcome to the choo admin dashboard. This page will be used to get you started using the framework while it is in early early stage. 
+
+    %h2 Create your first resource
+
+    %p
+      You can create a resource using the command line generator 
+      %code choo generate resource post title:string body:string
+    %h2 Configure pusher
+
+    %p 
+      Create a pusher account and generate a keypair. The configuration in
+      %code config/pusher.yml
+      should look like this:
+
+    %pre
+      app_id: "XXXXX"
+      key: "XXXXXXXXXX"
+      secret: "XXXXXXXXXX"
+      cluster: "eu"
+    %h2 Configure pusher
+
+    %table.table
+      %tbody
+        %tr
+          %td 
+            Create your first resource using
+            %code choo generate resource post title:string body:string
+          %td
+            - if Choo::Application.resources.count > 0
+              .badge.badge-success #{Choo::Application.resources.count} resources found
+            - else
+              .badge.badge-danger No resources found
+
+
+        %tr
+          %td 
+            Configure pusher in
+            %code config/pusher.yml
+          %td
+            - if Choo::SocketManager.make
+              .badge.badge-success Ready to go
+            - else
+              .badge.badge-danger No valid configuration found
+
+
+
+        %tr
+          %td 
+            Configure a route in 
+            %code config/routes.yml
+          %td
+            - if  Choo::Application.routes.count > 0
+              .badge.badge-success #{Choo::Application.routes.count} routes found
+            - else
+              .badge.badge-danger No routes found
+
+

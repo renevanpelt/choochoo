@@ -7,6 +7,7 @@ Gem::Specification.new do |s|
   s.files = [
     "views/admin/layout.html.haml",
     "views/admin/routes.html.haml",
+    "views/admin/events.html.haml",
     "views/admin/home.html.haml",
     "views/admin/resource.html.haml",
     "views/admin/resources.html.haml",
@@ -20,6 +21,7 @@ Gem::Specification.new do |s|
     "lib/choo/event.rb",
     "lib/choo/repository.rb",
     "lib/choo/resource.rb",
+
   ]
   s.executables   = ["choo"]
 
@@ -31,6 +33,7 @@ Gem::Specification.new do |s|
   s.add_dependency "colorize"
   s.add_dependency "fileutils"
   s.add_dependency "rack"
+  s.add_dependency "parametric"
   s.add_dependency "yaml"
   s.add_dependency "pusher"
   s.add_dependency "rerun"

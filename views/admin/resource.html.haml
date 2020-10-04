@@ -1,6 +1,19 @@
+
 %h2 Resource #{resource}
 
 .row
+  .col-md-6
+    .card
+      .card-header Commands
+      .card-body
+
+        %table.table
+          %thead
+            %tbody
+              - Choo::Application.resources[resource.to_sym][:commands].each do |command|
+                %tr
+                  %td
+                    %a{href:"/admin/resources/#{resource}/commands/#{command}"}=command
   .col-md-6
     .card
       .card-header Events
@@ -12,18 +25,8 @@
             %tbody
               - Choo::Application.resources[resource.to_sym][:events].each do |event|
                 %tr
-                  %td= event
-  .col-md-6
-    .card
-      .card-header Commands
-      .card-body
-
-        %table.table
-          %thead
-            %tbody
-              - Choo::Application.resources[resource.to_sym][:commands].each do |command|
-                %tr
-                  %td= command
+                  %td
+                    %a{href:"/admin/resources/#{resource}/events/#{event}"}=event
         
   .col-md-12.mt-4
     .card
@@ -33,10 +36,12 @@
         %table.table
           %thead
             - resource.capitalize.singularize.constantize.new.attributes.each do |attribute,value|
-              %th= attribute
+              - unless ['id', "uuid", "created_at"].include?(attribute)
+                %th= attribute
 
           %tbody
             - resource.capitalize.singularize.constantize.all.each do |entry|
               %tr
                 - entry.attributes.each do |attribute,value|
-                  %td= value
+                  - unless ['id', "uuid", "created_at"].include?(attribute)
+                    %td= value

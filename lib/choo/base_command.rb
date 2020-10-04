@@ -10,8 +10,17 @@ module Choo
     attr_accessor :payload
     attr_accessor :repository
 
+    def self.resource
+      self.to_s.split("::")[2]
+    end
+
+
+    def self.creation_command?
+      false
+    end
+
     def initialize(aggregate_id, payload)
-      self.payload = payload
+      self.payload = self.class.schema.resolve(payload).output
 
       if aggregate_id
         self.repository = Choo::Repository.get_aggregate_from_id(aggregate_id)
@@ -43,6 +52,7 @@ module Choo
     end
 
     def handle
+
 
        Choo::Event.create!(
          event_type: self.event_type,

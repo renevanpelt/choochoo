@@ -13,7 +13,7 @@
 module Choo
   class Event < EventRecord::Base
 
-    self.table_name = "Choo_events"
+    self.table_name = "choo_events"
 
     before_create :set_created_at
     after_create :push_event  
@@ -26,7 +26,6 @@ module Choo
     def push_event
       aggregate = event_type.constantize.new.perform(self)
       if event_type.constantize.publish_to
-
         SocketManager.make.trigger(aggregate.send(event_type.constantize.publish_to).to_param, event_type, {
           aggregate_id: aggregate_id,
           payload: payload,

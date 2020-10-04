@@ -6,7 +6,10 @@
     - Choo::Application.resources.each do |resource, data|
       %tr
         %td
-          %a{href: "/admin/resources/#{resource}"}= resource
+          %a{href: "/admin/resources/#{resource}"}= resource.to_s.capitalize
+        %td
+          = resource.to_s.singularize.capitalize.constantize.count
+          entries
         %td
           = data[:events].count
           events

@@ -1,7 +1,7 @@
 # As long as the use of the framework is still dev-only we
 # will only support pusher. We will spin up a free alternative
 # that compares to the free tier of pusher.
-
+require 'pusher'
 module Choo
   class SocketManager
 

@@ -2,6 +2,7 @@
 !!!
 %html{:lang => "en"}
   %head
+    %script{:src => "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"}
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %meta{:charset => "utf-8"}/
     %meta{:content => "width=device-width, initial-scale=1, shrink-to-fit=no", :name => "viewport"}/
@@ -63,6 +64,7 @@
 
           .mb-3
             %a.list-group-item.list-group-item-action.bg-light{:href => "/admin"} Admin
+            %a.list-group-item.list-group-item-action.bg-light{:href => "/admin/events"} Events
             %a.list-group-item.list-group-item-action.bg-light{:href => "/admin/resources"} Resources
             %a.list-group-item.list-group-item-action.bg-light{:href => "/admin/routes"} Routes
       #page-content-wrapper
@@ -86,12 +88,11 @@
               /     %a.dropdown-item{:href => "#"} Another action
               /     .dropdown-divider
               /     %a.dropdown-item{:href => "#"} Something else here
-        .container-fluid
+        .container-fluid.pt-2
 
 
           = content
 
-    %script{:src => "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"}
 
     %script{src: "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js", integrity: "sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV", crossorigin: "anonymous"}
     :javascript

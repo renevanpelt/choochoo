@@ -8,7 +8,6 @@ class SocketManager
 
   def self.make
     if File.exist?("./config/pusher.yml")
-      puts YAML.load(File.read('./config/pusher.yml')).inspect
       return Pusher::Client.new(YAML.load(File.read('./config/pusher.yml')).transform_keys(&:to_sym))
     else
       puts "Please configure your Pusher credentials in config/pusher.yml"

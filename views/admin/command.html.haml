@@ -1,0 +1,53 @@
+%h2 Command details
+.row
+  .col-md-12#response
+  .col-md-12
+    %table.table
+      %form#submitCommand{for: "", method: "post"}
+        %thead
+          %th Field name
+          %th Field type
+          %th Form input
+        %tbody
+          - unless command.creation_command?
+            %tr
+
+              %td
+                = command.resource
+                aggregate
+              %td
+                Reference (uuid)
+              %td
+                %select.form-control{name: "aggregate_id" }
+                  - command.resource.singularize.constantize.all.each do |entry|
+                    %option{value: entry.uuid}= entry.to_s
+
+
+          - command.schema.fields.each do |a,b|
+            %tr
+              %td= a
+              %td= b.meta_data[:type]
+              %td
+                %input.form-control{type: 'text', name: a}
+          %td
+          %td
+          %td
+            %input.btn.btn-primary{type: "submit"}
+      .list-group
+
+    :javascript
+      $( "#submitCommand" ).submit(function( event ) {
+        event.preventDefault();
+        url = "/admin/resources/#{resource}/commands/#{command_name}"
+
+        $.ajax({
+          type: "POST",
+          url: url,
+          data:  $( this ).serialize(),
+          success: function(e) {
+            console.log(e)
+            $("#response").html("<div class='alert alert-success'>Command executed successfully</div>")
+          },
+          dataType: "json"
+        });
+      });
