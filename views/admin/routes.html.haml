@@ -1,5 +1,10 @@
 %h1 Routes
 %table.table
+  %thead
+    %th Method
+    %th Path
+    %th Summary
+    %th Routing type
   %tbody
 
     - Choo::Application.routes.each do |path, methods|
@@ -8,7 +13,10 @@
           %td
             = method.upcase
           %td
-            = path
+            %code= path
           %td
             = route["summary"]
+          %td
+            - if route["response"].present?
+              .badge.badge-secondary Raw response
 

@@ -45,11 +45,11 @@ Navigate to `localhost:9292/admin` to see the automatically generated admin inte
 The next step is to generate the files and folders for an application resource. You can do this using the following command:
 
 ```
-$ choo generate [resource_name] [field_1_name]:[field_1_type] [field_2_name]:[field_2_type] ... [field_n_name]:[field_n_type]
+$ choo generate resource [resource_name] [field_1_name]:[field_1_type] [field_2_name]:[field_2_type] ... [field_n_name]:[field_n_type]
 
 # example with shorthand: 
 
-$ choo g posts title:string body:string
+$ choo g resource posts title:string body:string
 ```
 
 Your terminal will tell you which folders and files are created. Restart your server using:
