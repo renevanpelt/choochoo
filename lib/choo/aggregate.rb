@@ -13,6 +13,7 @@
 # code, but my intuition tells me we cannot/ don't want to 
 # standardize the mapping between the in-memory state and the 
 # read-model state
+
 module Choo
   class Aggregate
 

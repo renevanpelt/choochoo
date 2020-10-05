@@ -245,15 +245,6 @@ routes:
       summary: Home page
       response: Hello, world!
 
-  /about:
-    get:
-      summary: About page
-      response: This is the about page
-    post:
-      summary: About POST
-      response: This is the about page
-
-
 
 EOF
 end

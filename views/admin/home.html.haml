@@ -50,12 +50,12 @@
 
         %tr
           %td 
-            Configure a route in 
+            Configure a second route in 
             %code config/routes.yml
           %td
-            - if  Choo::Application.routes.count > 0
+            - if  Choo::Application.routes.count > 1
               .badge.badge-success #{Choo::Application.routes.count} routes found
             - else
-              .badge.badge-danger No routes found
+              .badge.badge-danger No second routes found
 
 

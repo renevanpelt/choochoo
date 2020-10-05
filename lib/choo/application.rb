@@ -2,12 +2,7 @@ require 'yaml'
 module Choo
   class Application
 
-
-
-
-
     @@resources = {}
-
 
     # We load the user defined helper classes 
     # from ./lib in the application folder
@@ -46,18 +41,13 @@ module Choo
 
     end
 
+
+
     def self.routes
       routes = YAML.load(File.open("./config/routes.yml"))['routes']
       returnvalue = []
 
-      routes.each do |k,r|
-        if r['get'].present?
-          returnvalue << {method: 'get', response: r['response'], route: "/"}
-        end
-        if r['post'].present?
-          returnvalue << {method: 'get', response: r['response'], route: "/"}
-        end
-      end
+      return routes
 
     end
 
