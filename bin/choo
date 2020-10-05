@@ -49,6 +49,12 @@ module Choo
       module Command
         class Create < Choo::BaseCommand
 
+
+          def self.creation_command?
+            true
+          end
+
+
           def self.schema
             Parametric::Schema.new do
               #{fields.map{|f| "field(:#{f['field']}).type(:#{f['type']}).present" }.join("\n              ")}
@@ -58,6 +64,37 @@ module Choo
 
           def event_type
             Choo::Resource::#{capitalized_name}::Events::Created
+          end
+
+        end
+      end
+    end
+  end
+end
+EOF
+end
+
+def command_file(resource_name, command_name ,fields)
+  capitalized_name = resource_name.split('_').collect(&:capitalize).join
+<<-EOF
+require 'choo/base_command'
+module Choo
+  module Resource
+    module #{capitalized_name}
+      module Command
+        class #{command_name.capitalize} < Choo::BaseCommand
+
+
+
+          def self.schema
+            Parametric::Schema.new do
+              #{fields.map{|f| "field(:#{f['field']}).type(:#{f['type']}).present" }.join("\n              ")}
+              # field(:#{resource_name}_type).options(#{capitalized_name}Types.symbols).default(#{capitalized_name}Types.default)
+            end
+          end
+
+          def event_type
+            Choo::Resource::#{capitalized_name}::Events::#{command_name.capitalize}
           end
 
         end
@@ -78,6 +115,46 @@ module Choo
   module Resource
     module #{capitalized_name}
       module Events
+
+
+        class Created < Choo::BaseEvent
+
+          def self.apply_to_aggregate(aggregate, payload = {})
+            copy = aggregate
+            #{fields.map{|f| "copy.fields['#{f['field']}'] = payload['#{f['field']}']" }.join("\n            ")}
+            return copy 
+          end
+
+          # def self.publish_to
+          #   self
+          # end
+
+          def perform(event)
+            #{capitalized_name.singularize}.create!(
+              #{fields.map{|f| "#{f['field']}: event.payload['#{f['field']}'],"}.join("\n              ")}
+              uuid: event.aggregate_id,
+              version: event.version
+            )
+          end
+        end
+      end
+    end
+  end
+end
+EOF
+end
+
+
+def event_file(resource_name,event_name,fields)
+
+  capitalized_name = resource_name.split('_').collect(&:capitalize).join
+<<-EOF
+require 'choo/base_event'
+
+module Choo
+  module Resource
+    module #{capitalized_name}
+      module #{event_name.capitalize}
 
 
         class Created < Choo::BaseEvent
@@ -327,15 +404,43 @@ elsif command == "generate" || command == "g"
     create_directory("resources/#{resource_to_generate}")
     create_directory("resources/#{resource_to_generate}/commands")
     create_directory("resources/#{resource_to_generate}/events")
-    create_directory("resources/#{resource_to_generate}/controllers")
     create_file("resources/#{resource_to_generate}/#{resource_to_generate.singularize}.rb", model_file(resource_to_generate, validated_fields))
     create_file("resources/#{resource_to_generate}/events/created.rb", created_event_file(resource_to_generate, validated_fields))
     create_file("resources/#{resource_to_generate}/events/updated.rb", updated_event_file(resource_to_generate, validated_fields))
     create_file("resources/#{resource_to_generate}/commands/update.rb", update_command_file(resource_to_generate, validated_fields))
     create_file("resources/#{resource_to_generate}/commands/create.rb", create_command_file(resource_to_generate, validated_fields))
 
+  elsif what_to_generate == "command"
+
+    resource_name = arguments[2]
+    if File.directory?("resources/#{resource_name}")
+
+      command, event = arguments[3].split('/')
+      fields = arguments[4..-1]
+      
+      validated_fields = []
+      fields.each do |field|
+        parts = field.split(":")
+        if parts.count == 2
+          name = parts[0]
+          type = parts[1]
+          validated_fields  << {'field' => name, 'type' => type}
+        else
+          raise StandardError
+        end
+      end
+
+      create_file("resources/#{resource_name}/events/#{event}.rb", event_file(resource_name, event, validated_fields))
+      create_file("resources/#{resource_name}/commands/#{command}.rb", command_file(resource_name, command, validated_fields))
+
+    else
+      puts "resource folder not found at 'resources/#{resource_name}/'.".red
+
+    end
+
+
   else
-    puts "Don't know how to generate '#{command}'. At this time only resources and controllers can be generated using 'choo g resource'.".red
+    puts "Don't know how to generate '#{command}'. At this time only resources and commands can be generated using 'choo g resource'.".red
   end
 
 else
