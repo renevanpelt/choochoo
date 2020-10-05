@@ -34,8 +34,11 @@ $ bundle
 Now you are in your choo application folder. To run the development server, run:
 
 ```
-choo server -p 9292
-# shorthand: choo s
+$ choo server -p 9292
+
+# shorthand: 
+
+$ choo s
 ```
 
 Navigate to `localhost:9292/admin` to see the automatically generated admin interface.
@@ -43,11 +46,22 @@ Navigate to `localhost:9292/admin` to see the automatically generated admin inte
 The next step is to generate the files and folders for an application resource. You can do this using the following command:
 
 ```
-choo generate [resource_name] [field_1_name]:[field_1_type] [field_2_name]:[field_2_type] ... [field_n_name]:[field_n_type]
+$ choo generate [resource_name] [field_1_name]:[field_1_type] [field_2_name]:[field_2_type] ... [field_n_name]:[field_n_type]
 
-# example with shorthand: choo g posts title:string body:string
+# example with shorthand: 
+
+$ choo g posts title:string body:string
 ```
 
+Your terminal will tell you which folders and files are created. Restart your server using:
+
+```
+$ choo s
+```
+
+And navigate to `localhost:9292/admin` and click the resources button in the sidebar, then click on the posts resource you just created. On the next screen you will see the commands and events related to the posts resource. Clicking on a command name allows you to try out the command by passing the payload parameters in the automatically generated form on the page.
+
+After you have run some commands, you will see the events on the event log in detail. You will also see the current state of all created posts when you click resources > posts.
 
 ## Design goals
 
