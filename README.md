@@ -28,7 +28,6 @@ $ choo new demo_blog
 $ choo cd demo_blog
 $ bundle
 
-
 ```
 
 Now you are in your choo application folder. To run the development server, run:
