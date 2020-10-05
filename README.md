@@ -18,12 +18,15 @@ Where in Ruby on Rails you would define a model, in Choo you define resources. Y
 Considering you have ruby installed on your machine, run:
 
 ```
-choo new [application_name]
-cd [application_name]
-bundle
+$ choo new [application_name]
+$ cd [application_name]
+$ bundle
 
 # for example:
-# choo new demo_blog
+
+$ choo new demo_blog
+$ choo cd demo_blog
+$ bundle
 
 
 ```
@@ -35,7 +38,16 @@ choo server -p 9292
 # shorthand: choo s
 ```
 
-Navigate to `localhost:9292`
+Navigate to `localhost:9292/admin` to see the automatically generated admin interface.
+
+The next step is to generate the files and folders for an application resource. You can do this using the following command:
+
+```
+choo generate [resource_name] [field_1_name]:[field_1_type] [field_2_name]:[field_2_type] ... [field_n_name]:[field_n_type]
+
+# example with shorthand: choo g posts title:string body:string
+```
+
 
 ## Design goals
 
