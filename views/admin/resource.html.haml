@@ -14,6 +14,9 @@
                 %tr
                   %td
                     %a{href:"/admin/resources/#{resource}/commands/#{command}"}=command
+                  %td
+                    - if "Choo::Resource::#{resource.capitalize}::Command::#{command.capitalize}".constantize.creation_command?
+                      .badge.badge-warning Creation command
   .col-md-6
     .card
       .card-header Events

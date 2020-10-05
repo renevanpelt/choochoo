@@ -154,10 +154,10 @@ require 'choo/base_event'
 module Choo
   module Resource
     module #{capitalized_name}
-      module #{event_name.capitalize}
+      module Events
 
 
-        class Created < Choo::BaseEvent
+        class #{event_name.capitalize} < Choo::BaseEvent
 
           def self.apply_to_aggregate(aggregate, payload = {})
             copy = aggregate
@@ -170,11 +170,8 @@ module Choo
           # end
 
           def perform(event)
-            #{capitalized_name.singularize}.create!(
-              #{fields.map{|f| "#{f['field']}: event.payload['#{f['field']}'],"}.join("\n              ")}
-              uuid: event.aggregate_id,
-              version: event.version
-            )
+            obj = #{capitalized_name.singularize}.find_by(uuid: event.aggregate_id)
+            return obj.update(event.payload)
           end
         end
       end
@@ -235,9 +232,9 @@ module Choo
             return copy 
           end
 
-          def self.publish_to
-            self
-          end
+          # def self.publish_to
+          #   self
+          # end
 
           def perform(event)
             obj = #{capitalized_name.singularize}.find_by(uuid: event.aggregate_id)
