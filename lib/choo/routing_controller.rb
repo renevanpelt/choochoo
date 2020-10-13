@@ -7,32 +7,13 @@ require 'sinatra/base'
 
 module Choo
   class RoutingController < Sinatra::Base
-         get "/a" do
-          "Hello adsworld"
-        end
-    puts "!!!!!!!!!!!!!!"
-    puts "!!!!!!!!!!!!!!"
-    puts "!!!!!!!!!!!!!!"
-    puts "!!!!!!!!!!!!!!"
-    puts "!!!!!!!!!!!!!!"
-    puts "!!!!!!!!!!!!!!"
-    puts "!!!!!!!!!!!!!!"
-    puts Choo::Application.routes.inspect
-    puts Choo::Application.routes.inspect
-    puts Choo::Application.routes.inspect
-    puts Choo::Application.routes.inspect
-    Choo::Application.routes.each do |path, route|
+    Choo::Application.routes.each do |route|
 
-      if route['get'].present?
-        puts "asdfasdfasfd"
-        puts route
-        puts path
-        get path do
-          route["get"]["response"]
+      if route[:method] == "GET"
+        get route[:path] do
+          route[:value]
         end
-        
-      elsif route["post"].present?
-
+      elsif route[:method] == "POST"
       end
     end
 

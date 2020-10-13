@@ -17,6 +17,7 @@ Gem::Specification.new do |s|
     "lib/choo/base_command.rb",
     "lib/choo/routing_controller.rb",
     "lib/choo/base_event.rb",
+    "lib/choo/base_query.rb",
     "lib/choo/socket_manager.rb",
     "lib/choo/event.rb",
     "lib/choo/repository.rb",
@@ -37,6 +38,7 @@ Gem::Specification.new do |s|
   s.add_dependency "yaml"
   s.add_dependency "pusher"
   s.add_dependency "rerun"
+  s.add_dependency 'active_model_serializers', '~> 0.10.0'
 
 
 end

@@ -23,7 +23,11 @@ module Choo
 
       require "./resources/#{resource_name}/#{resource_name.singularize}.rb"
       
-      @@resources[resource_name.to_sym] = {events: [], commands: []}
+      # Load the serializer file 
+
+      # require "./resources/#{resource_name}/#{resource_name.singularize}_serializer.rb"
+      
+      @@resources[resource_name.to_sym] = {events: [], commands: [], queries: []}
       
       # Load the commands associated with this resource
 
@@ -32,22 +36,49 @@ module Choo
         require command_file
       end
       
+      # Load the queries associated with this resource
+
+      Dir.glob("./resources/#{resource_name}/queries/*.rb") do |query_file|
+        @@resources[resource_name.to_sym][:queries] << query_file[0...-3].split("/").last
+        require query_file
+      end
+      
       # Load the events associated with this resource
       
       Dir.glob("./resources/#{resource_name}/events/*.rb") do |event_file|
         @@resources[resource_name.to_sym][:events] << event_file[0...-3].split("/").last
         require event_file
       end
+      require "./seeds.rb"
 
     end
 
 
 
     def self.routes
-      routes = YAML.load(File.open("./config/routes.yml"))['routes']
+      r = YAML.load(File.open("./config/routes.yml"))['routes']
 
+      return_value = []
+      
+      r.each do |path, methods|
+        methods.each do |method, route|
+          obj = {method: method.upcase, path: path}
 
-      return routes
+          if route["response"].present?
+            obj[:type] = :response
+            obj[:value] = route["response"]
+          elsif route["command"].present?
+            obj[:type] = :command
+            obj[:value] = route["command"]
+          elsif route["query"].present?
+            obj[:type] = :query
+            obj[:value] = route["query"]
+          end
+
+          return_value << obj
+        end
+      end
+      return return_value
 
     end
 

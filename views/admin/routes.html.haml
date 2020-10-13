@@ -7,16 +7,24 @@
     %th Routing type
   %tbody
 
-    - Choo::Application.routes.each do |path, methods|
-      - methods.each do |method, route|
-        %tr
-          %td
-            = method.upcase
-          %td
-            %code= path
-          %td
-            = route["summary"]
-          %td
-            - if route["response"].present?
-              .badge.badge-secondary Raw response
+    - Choo::Application.routes.each do |route|
+
+      %tr
+        %td
+          = route[:method]
+        %td
+          %code= route[:path]
+        %td
+          = route[:summary]
+        %td
+          - if route[:type] == :response
+            .badge.badge-secondary Raw response
+          - elsif route[:type] == :command
+            .badge.badge-secondary
+              Command
+              %a{href:"#", style:"color:lightblue;"}= route[:value]
+          - elsif route[:type] == :query
+            .badge.badge-secondary
+              Query
+              %a{href:"#", style:"color:lightblue;"}=route[:value]
 

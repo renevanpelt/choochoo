@@ -1,3 +1,5 @@
+require 'choo/repository'
+require 'choo/event'
 
 
 # Every command inherits from BaseCommand. Might

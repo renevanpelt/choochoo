@@ -2,7 +2,7 @@
 %h2 Resource #{resource}
 
 .row
-  .col-md-6
+  .col-md-4
     .card
       .card-header Commands
       .card-body
@@ -17,7 +17,7 @@
                   %td
                     - if "Choo::Resource::#{resource.capitalize}::Command::#{command.capitalize}".constantize.creation_command?
                       .badge.badge-warning Creation command
-  .col-md-6
+  .col-md-4
     .card
       .card-header Events
       .card-body
@@ -30,6 +30,20 @@
                 %tr
                   %td
                     %a{href:"/admin/resources/#{resource}/events/#{event}"}=event
+        
+  .col-md-4
+    .card
+      .card-header Queries
+      .card-body
+
+
+        %table.table
+          %thead
+            %tbody
+              - Choo::Application.resources[resource.to_sym][:queries].each do |query|
+                %tr
+                  %td
+                    %a{href:"/admin/resources/#{resource}/queries/#{query}"}=query
         
   .col-md-12.mt-4
     .card

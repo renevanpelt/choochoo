@@ -72,4 +72,5 @@ After you have run some commands, you will see the events on the event log in de
 
 - Specify gem versions in the gemspec
 - Implement database migrations like in RoR
+- The read-models should be read-only except in the context of a logged event
 - A lot more

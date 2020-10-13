@@ -181,8 +181,17 @@ end
 EOF
 end
 
+def serializer_file(resource_name, fields)
 
+<<-EOF
+class #{capitalized_name.singularize}Serializer < ActiveModel::Serializer
 
+  attributes #{fields.map{|f| ":#{f['field']}" }.join(", ")}
+
+end
+EOF
+
+end
 
 def update_command_file(resource_name,fields)
   capitalized_name = resource_name.split('_').collect(&:capitalize).join
@@ -401,6 +410,8 @@ elsif command == "generate" || command == "g"
     create_directory("resources/#{resource_to_generate}")
     create_directory("resources/#{resource_to_generate}/commands")
     create_directory("resources/#{resource_to_generate}/events")
+
+    create_file("resources/#{resource_to_generate}/#{resource_to_generate.singularize}Serializer.rb", serializer_file(resource_to_generate, validated_fields))
     create_file("resources/#{resource_to_generate}/#{resource_to_generate.singularize}.rb", model_file(resource_to_generate, validated_fields))
     create_file("resources/#{resource_to_generate}/events/created.rb", created_event_file(resource_to_generate, validated_fields))
     create_file("resources/#{resource_to_generate}/events/updated.rb", updated_event_file(resource_to_generate, validated_fields))

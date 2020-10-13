@@ -55,6 +55,11 @@ class AdminController < Sinatra::Base
     Choo::Application.render_template( "#{GEM_DIR}/views/admin/event", {resource: params[:resource], event_name: params[:event_name],event: event}, "#{GEM_DIR}/views/admin/layout")
   end
 
+  get "/admin/resources/:resource/queries/:query_name" do 
+    query = "Choo::Resource::#{params[:resource].capitalize}::Queries::#{params[:query_name].capitalize.singularize}".constantize
+    Choo::Application.render_template( "#{GEM_DIR}/views/admin/query", {resource: params[:resource], query_name: params[:query_name],query: query}, "#{GEM_DIR}/views/admin/layout")
+  end
+
   post "/admin/resources/:resource/commands/:command_name" do 
     command = "Choo::Resource::#{params[:resource].capitalize}::Command::#{params[:command_name].capitalize.singularize}".constantize
     if params[:aggregate_id]
